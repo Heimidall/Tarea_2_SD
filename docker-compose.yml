@@ -1,0 +1,27 @@
+version: "3.7"
+
+services:
+  producer:
+    build:
+      context: ./producer
+      dockerfile: DOCKERFILE
+    image: ubuntu
+    network_mode: "host"
+    volumes:
+      - ./producer:/Tarea_2_SD/Ejercicio_2/
+    command: bash -c "sudo service rabbitmq-server start && python3 server.py"
+    stdin_open: true
+    tty: true
+
+  consumer:
+    build:
+      context: ./consumer
+      dockerfile: DOCKERFILE
+    image: ubuntu
+    network_mode: "host"
+    volumes:
+      - ./consumer:/Tarea_2_SD/Ejercicio_2/
+    command: bash -c "sleep 10 && python3 cliente.py"
+    stdin_open: true
+    tty: true
+    restart: on-failure
