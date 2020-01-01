@@ -51,24 +51,29 @@ class Cliente():
         #print("[X] Mensaje Recibido: %r " % msj['mensaje'])   
 
     def crear_cola(self):
-        t_connection = pika.BlockingConnection(pika.ConnectionParameters(host = self.host))
-        t_channel = t_connection.channel()
-        t_channel.queue_declare(queue = self.nombre_cola)
-        t_channel.basic_consume(queue = self.nombre_cola, on_message_callback = self.callback, auto_ack=True)
-        #print("Esperando mensajes")
-        self.channel.basic_publish(exchange = '', routing_key='Servidor', body=str({"emisor" : self.nombre_cola,
-                                                        "mensaje" : "Necesito nombre",
-                                                        "timestamp" : datetime.now().strftime("%d-%b-%Y|%H:%M:%S"),
-                                                        "tipo" : 0 
-                                                        }))
-        t_channel.start_consuming()
+        try:
+            t_connection = pika.BlockingConnection(pika.ConnectionParameters(host = self.host))
+            t_channel = t_connection.channel()
+            t_channel.queue_declare(queue = self.nombre_cola)
+            t_channel.basic_consume(queue = self.nombre_cola, on_message_callback = self.callback, auto_ack=True)
+            #print("Esperando mensajes")
+            self.channel.basic_publish(exchange = '', routing_key='Servidor', body=str({"emisor" : self.nombre_cola,
+                                                            "mensaje" : "Necesito nombre",
+                                                            "timestamp" : datetime.now().strftime("%d-%b-%Y|%H:%M:%S"),
+                                                            "tipo" : 0 
+                                                            }))
+            t_channel.start_consuming()
+        except:
+            print("Ocurrió un problema creando la cola, por favor intente nuevamente")
 
 
     #con publish mandamos el mensaje a una cola determinada
     def publish(self, routing_key, mensaje, exchange = ''):
-
-        self.channel.basic_publish(exchange = exchange, routing_key = routing_key, body = str(mensaje))
-        #print("Mensaje enviado: {}".format(mensaje))  
+        try:
+            self.channel.basic_publish(exchange = exchange, routing_key = routing_key, body = str(mensaje))
+            #print("Mensaje enviado: {}".format(mensaje))  
+        except:
+            print("Ocurrió un problema, por favor intente de nuevo")    
 
     def __exit__(self, exc_type, exc_eval, exc_tb):
         print("Cerrando conexion")

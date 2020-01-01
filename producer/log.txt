@@ -1,0 +1,2 @@
+[01-Jan-2020|23:04:06] |  [Cliente_2]   |  [Cliente_1]     |      [1]      | Hola 
+[01-Jan-2020|23:04:32] |  [Cliente_1]   |  [Cliente_1]     |      [2]      | HGola 
