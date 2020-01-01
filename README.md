@@ -23,6 +23,6 @@ Si se desea agregar mas clientes a la arquitectura es necesario el siguiente com
 ### Ingresar valores por consola
 
 Para ingresar valores a través de la consola con docker es necesario hacer abrir una nueva terminal, en la cual se debe ingresar el siguiente comando:
-> docker attach <Nombre del container>
+> docker attach \<Nombre del container\>
   
 Este proceso se debe repetir para la cantidad de terminales en las cuales desee ingresar valores.
