@@ -26,3 +26,5 @@ Para ingresar valores a través de la consola con docker es necesario hacer abri
 > docker attach \<Nombre del container\>
   
 Este proceso se debe repetir para la cantidad de terminales en las cuales desee ingresar valores.
+
+**Nota: Muchas veces el nombre que docker le asigna al container no coincide con el id que el servidor le asigna al cliente, por ejemplo hay veces que docker nombra al container como "consumer_2" lo que puede dar a entender que es el cliente_2 cuando el servidor lo nombra como Cliente_1, esto puede generar problemas dentro de la lógica del programa.**
