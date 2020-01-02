@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+service msgService {
+	rpc sendMsg (chatMsg) returns (confirmation);
+	rpc askMsg (userID) returns (chatMsg);
+	rpc getUsers (emptyz) returns (userIDS);
+	rpc joinChat (userID) returns (userID);
+	rpc getAllMsgs (userID) returns (allMsgs);
+}
+
+message emptyz {}
+
+message userID {
+	string userID = 1;
+}
+
+message userIDS {
+	repeated userID userIDS = 1;
+}
+
+message chatMsg {
+	string orig = 1;
+	string dest = 2;
+	string msg = 3;
+}
+
+message allMsgs {
+	repeated chatMsg allMsgs = 1;
+}
+
+message confirmation {
+	string conf = 1;
+}
